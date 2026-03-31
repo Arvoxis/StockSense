@@ -1,70 +1,131 @@
-# StockSense Backend
+﻿<div align="center">
 
-Node.js/Express backend for the AI-powered stock trading dashboard.
+# StockSense
 
-## Setup
+**AI-Powered Stock Dashboard for Smarter Retail Investing**
 
+![JavaScript](https://img.shields.io/badge/JavaScript-95.2%25-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat-square&logo=node.js&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![Claude AI](https://img.shields.io/badge/Claude_AI-Anthropic-D4A574?style=flat-square)
+
+</div>
+
+---
+
+## What is StockSense?
+
+StockSense is a full-stack stock dashboard that combines real-time market data with Claude AI analysis to help retail investors make informed decisions without juggling ten different tabs.
+
+**Key features:**
+- **Live Quotes & Charts** — Real-time prices and interactive OHLCV candlestick charts
+- **AI Analysis** — Claude-powered buy/sell/hold recommendations fusing technicals, news, and sentiment
+- **Why Is It Moving?** — AI-generated plain-English explanations for stock movements
+- **Smart Screener** — Filter stocks with AI-ranked top 3 picks
+- **Watchlist** — Track favorites with AI sentiment scores
+- **User Accounts** — Full auth system with JWT, profile management, and avatar uploads
+
+---
+
+## Architecture
+```
+StockSense/
+├── client/              # Frontend (HTML/CSS/JS)
+├── src/
+│   ├── routes/          # Express API routes
+│   ├── middleware/       # Auth, error handling
+│   ├── models/          # MongoDB/Mongoose schemas
+│   └── services/        # External API integrations
+├── server.js            # Entry point
+├── .env.example         # Environment variable template
+└── package.json
+```
+
+---
+
+## Quick Start
+
+### Prerequisites
+- Node.js 18+
+- MongoDB instance (local or Atlas)
+- API keys: Anthropic (Claude), Finnhub, Alpha Vantage (optional), NewsAPI (optional)
+
+### Setup
 ```bash
-# 1. Install dependencies
+# Clone the repo
+git clone https://github.com/Arvoxis/StockSense.git
+cd StockSense
+
+# Install dependencies
 npm install
 
-# 2. Copy and fill in your API keys
+# Configure environment variables
 cp .env.example .env
+# Fill in your API keys in .env
 
-# 3. Start dev server (hot reload)
+# Start development server (hot reload)
 npm run dev
 
-# 4. Start production server
+# Or start production server
 npm start
 ```
 
-## Environment Variables
+### Environment Variables
 
-See `.env.example` for all required variables.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| MONGO_URI | Yes | MongoDB connection string |
+| JWT_SECRET | Yes | Secret for access tokens |
+| JWT_REFRESH_SECRET | Yes | Secret for refresh tokens |
+| ANTHROPIC_API_KEY | Yes | Claude API key for AI features |
+| FINNHUB_API_KEY | Yes | Primary market data source |
+| ALPHA_VANTAGE_KEY | Optional | Chart data fallback |
+| NEWS_API_KEY | Optional | Secondary news source |
 
-| Variable | Description |
-|----------|-------------|
-| `PORT` | Server port (default 5000) |
-| `MONGO_URI` | MongoDB connection string |
-| `JWT_SECRET` | Secret for access tokens (15 min) |
-| `JWT_REFRESH_SECRET` | Secret for refresh tokens (7 days) |
-| `ANTHROPIC_API_KEY` | Claude API key |
-| `FINNHUB_API_KEY` | Finnhub key — primary data source |
-| `ALPHA_VANTAGE_KEY` | Alpha Vantage — chart fallback only |
-| `NEWS_API_KEY` | NewsAPI — optional secondary source |
+---
 
-## API Routes
+## API Overview
 
-| Method | Route | Auth | Description |
-|--------|-------|------|-------------|
-| POST | `/api/auth/signup` | — | Register |
-| POST | `/api/auth/login` | — | Login |
-| POST | `/api/auth/refresh` | — | Refresh token |
-| POST | `/api/auth/logout` | — | Logout |
-| GET | `/api/auth/me` | ✅ | Current user |
-| GET | `/api/stocks/search` | — | Search tickers |
-| GET | `/api/stocks/:ticker/quote` | — | Live quote |
-| GET | `/api/stocks/:ticker/chart` | — | OHLCV candles |
-| GET | `/api/stocks/:ticker/stats` | — | Fundamentals |
-| GET | `/api/stocks/:ticker/indicators` | — | EMA/BB/RSI/MACD |
-| GET | `/api/market/indices` | — | S&P/NASDAQ/DOW/VIX |
-| GET | `/api/market/topmovers` | — | Top gainer |
-| GET | `/api/news` | — | Market/company news |
-| POST | `/api/ai/analyze` | — | Claude analysis |
-| GET | `/api/ai/whymoving/:ticker` | — | Explain movement |
-| POST | `/api/ai/sentiment` | — | Sentiment scoring |
-| GET | `/api/ai/watchlist-scores` | ✅ | AI watchlist scores |
-| GET | `/api/ai/screener-picks` | — | Top 3 AI picks |
-| GET | `/api/watchlist` | ✅ | Get watchlist |
-| POST | `/api/watchlist/:ticker` | ✅ | Add ticker |
-| DELETE | `/api/watchlist/:ticker` | ✅ | Remove ticker |
-| GET | `/api/screener` | — | Filter stocks |
-| PUT | `/api/user/profile` | ✅ | Update profile |
-| POST | `/api/user/avatar` | ✅ | Upload avatar |
-| DELETE | `/api/user/account` | ✅ | Delete account |
+The backend exposes RESTful endpoints across five domains:
 
-## Health Check
+- **Auth** — Signup, login, JWT refresh, logout
+- **Stocks** — Search, live quotes, charts, fundamentals, technical indicators (EMA/BB/RSI/MACD)
+- **Market** — Index tracking (S&P 500, NASDAQ, DOW, VIX), top movers
+- **AI** — Claude analysis, movement explainer, sentiment scoring, screener picks
+- **User** — Watchlist CRUD, profile updates, avatar upload
 
-```
-GET /health → { status: 'ok', time: '...' }
-```
+Health check available at GET /health.
+
+---
+
+## Built With
+
+- **Backend:** Node.js, Express
+- **Database:** MongoDB, Mongoose
+- **AI:** Anthropic Claude API
+- **Market Data:** Finnhub, Alpha Vantage
+- **Auth:** JWT (access + refresh tokens)
+- **Frontend:** Vanilla JS, CSS
+
+---
+
+## Roadmap
+
+- [ ] Add WebSocket for real-time price streaming
+- [ ] Portfolio tracking with P&L calculations
+- [ ] Mobile-responsive redesign
+- [ ] Deploy to production (Render/Railway)
+
+---
+
+## License
+
+This project is open source and available under the MIT License.
+
+---
+
+<div align="center">
+
+**Built by [Rakshit Sinha](https://github.com/Arvoxis)**
+
+</div>
