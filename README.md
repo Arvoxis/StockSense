@@ -1,129 +1,192 @@
-# 🪄 Harry Potter OpenCV Games
+# 📈 StockSense
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.7+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![OpenCV](https://img.shields.io/badge/OpenCV-4.x-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
-![MediaPipe](https://img.shields.io/badge/MediaPipe-Google-FF6F00?style=for-the-badge&logo=google&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Claude AI](https://img.shields.io/badge/Claude_AI-Anthropic-CC785C?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**Real-time hand-tracking games with a Harry Potter twist — built for a college escape room expo.**
+**An AI-powered stock dashboard that gives you real-time prices, interactive charts, and Claude AI buy/sell/hold calls — all in one place.**
+
+> Stop juggling tabs. StockSense fuses technicals, news, and sentiment into one clean interface.
 
 </div>
 
 ---
 
-## 🎬 Demo
+## 🖼️ Screenshot
 
-> Point your index finger at the camera and catch flying golden snitches in real time!
-
-*(Add a GIF/screenshot of gameplay here — even a photo from the expo works great!)*
+*(Add a screenshot of your dashboard here — hugely boosts impressions!)*
 
 ---
 
-## 🎮 Features
+## ✨ Features
 
-- **Golden Snitch Chase** — Use your index finger to catch snitches flying across the screen
-- **Real-time hand tracking** via MediaPipe — no controllers needed, just a webcam
-- **Difficulty scaling** — snitches get faster as your score climbs
-- **Combo system** — catch multiple snitches in quick succession for bonus points
-- **Bludger obstacles** — avoid rogue bludgers or lose points
-- **Power-ups** — special catches grant temporary abilities
+- 📊 **Real-time stock prices** via Finnhub API
+- 🤖 **Claude AI analysis** — get buy/sell/hold recommendations with reasoning
+- 💬 **"Why Is It Moving?"** — one-click AI explainer for any price movement
+- 📰 **News + Sentiment fusion** — market and company news aggregated in real time
+- 📉 **Technical indicators** — EMA, Bollinger Bands, RSI, MACD
+- ⭐ **Watchlist** — track your favourite tickers with AI scores
+- 🔍 **Stock Screener** — filter stocks by criteria, get AI top picks
+- 🔐 **JWT Authentication** — secure login with access/refresh token flow
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Library | Purpose |
+| Layer | Technology |
 |---|---|
-| `opencv-python` | Video capture, rendering, frame processing |
-| `mediapipe` | Real-time hand landmark detection |
-| `numpy` | Coordinate math and array operations |
+| Backend | Node.js, Express |
+| Database | MongoDB (Atlas) |
+| Auth | JWT (access + refresh tokens) |
+| AI | Anthropic Claude API |
+| Market Data | Finnhub (primary), Alpha Vantage (charts fallback) |
+| News | NewsAPI |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.7+
-- A webcam
-- Decent lighting (the hand tracker loves it)
+- Node.js 18+
+- MongoDB Atlas account (free tier works)
+- API keys: Anthropic, Finnhub, Alpha Vantage, NewsAPI
 
 ### Installation
 
 ```bash
 # Clone the repo
-git clone https://github.com/Arvoxis/Harry-puttar-snitch-game.git
-cd Harry-puttar-snitch-game
+git clone https://github.com/Arvoxis/StockSense.git
+cd StockSense
 
 # Install dependencies
-pip install -r requirements.txt
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Fill in your API keys in .env
 ```
+
+### Environment Variables
+
+| Variable | Description |
+|---|---|
+| `PORT` | Server port (default: 5000) |
+| `MONGO_URI` | MongoDB connection string |
+| `JWT_SECRET` | Secret for access tokens (15 min expiry) |
+| `JWT_REFRESH_SECRET` | Secret for refresh tokens (7 day expiry) |
+| `ANTHROPIC_API_KEY` | Claude API key |
+| `FINNHUB_API_KEY` | Finnhub — primary market data source |
+| `ALPHA_VANTAGE_KEY` | Alpha Vantage — chart data fallback |
+| `NEWS_API_KEY` | NewsAPI — optional secondary news source |
 
 ### Run
 
 ```bash
-python snitch.py
+# Development (hot reload)
+npm run dev
+
+# Production
+npm start
 ```
 
 ---
 
-## 🕹️ How to Play
+## 📡 API Reference
 
-1. Run the script — your webcam feed will open
-2. **Point your index finger** toward the camera
-3. Move your finger to **touch the golden snitch** on screen
-4. Avoid bludgers — they deduct points
-5. Build combos for multiplied scores!
+### Auth
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/api/auth/signup` | — | Register new user |
+| POST | `/api/auth/login` | — | Login |
+| POST | `/api/auth/refresh` | — | Refresh access token |
+| POST | `/api/auth/logout` | — | Logout |
+| GET | `/api/auth/me` | ✅ | Get current user |
 
-**Controls:**
-| Action | Gesture |
-|---|---|
-| Catch snitch | Point index finger at it |
-| Quit game | Press `Q` |
+### Stocks
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/stocks/search` | Search tickers |
+| GET | `/api/stocks/:ticker/quote` | Live quote |
+| GET | `/api/stocks/:ticker/chart` | OHLCV candlestick data |
+| GET | `/api/stocks/:ticker/stats` | Fundamental data |
+| GET | `/api/stocks/:ticker/indicators` | EMA / BB / RSI / MACD |
+
+### AI Endpoints
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/ai/analyze` | Claude buy/sell/hold analysis |
+| GET | `/api/ai/whymoving/:ticker` | Explain why a stock is moving |
+| POST | `/api/ai/sentiment` | Sentiment scoring |
+| GET | `/api/ai/screener-picks` | Top 3 AI stock picks |
+
+### Market & More
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/market/indices` | S&P 500, NASDAQ, DOW, VIX |
+| GET | `/api/market/topmovers` | Top gainers/losers |
+| GET | `/api/news` | Market and company news |
+| GET | `/api/screener` | Filter stocks by criteria |
+
+### Health Check
+```
+GET /health → { status: 'ok', time: '...' }
+```
 
 ---
 
 ## 📁 Project Structure
 
 ```
-Harry-puttar-snitch-game/
-├── snitch.py          # Main game loop
-├── requirements.txt   # Python dependencies
-├── README.md
-└── .gitignore
+StockSense/
+├── server.js              # Express app entry point
+├── src/
+│   ├── routes/            # API route handlers
+│   ├── controllers/       # Business logic
+│   ├── models/            # MongoDB schemas
+│   └── middleware/        # Auth, error handling
+├── client/                # Frontend
+├── .env.example           # Environment variable template
+├── package.json
+└── README.md
 ```
 
 ---
 
-## 🎓 Background
+## 🗺️ Roadmap
 
-Built as part of a **Harry Potter themed escape room** at our college tech expo. The game was a crowd-pleaser — players had to catch 10 snitches within a time limit to unlock the next escape room clue.
-
----
-
-## 📦 Requirements
-
-```
-opencv-python
-mediapipe
-numpy
-```
+- [ ] Portfolio tracking with P&L
+- [ ] Price alerts via email/SMS
+- [ ] Options chain data
+- [ ] Mobile responsive frontend
+- [ ] WebSocket live price streaming
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests are welcome! If you want to add a new game mode (Whomping Willow whacker, anyone?), fork the repo and open a PR.
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m "feat: add your feature"`
+4. Push and open a PR
+
+---
+
+## ⚠️ Disclaimer
+
+StockSense is for **educational purposes only**. AI analysis is not financial advice. Always do your own research before making investment decisions.
 
 ---
 
 ## 📄 License
 
-MIT License — free to use, remix, and build on.
+MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
 <div align="center">
-Made with ⚡ by <a href="https://github.com/Arvoxis">Arvoxis</a>
+Built with ☕ and Claude AI by <a href="https://github.com/Arvoxis">Arvoxis</a>
 </div>
