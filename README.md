@@ -1,131 +1,129 @@
-﻿<div align="center">
+# 🪄 Harry Potter OpenCV Games
 
-# StockSense
+<div align="center">
 
-**AI-Powered Stock Dashboard for Smarter Retail Investing**
+![Python](https://img.shields.io/badge/Python-3.7+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.x-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-Google-FF6F00?style=for-the-badge&logo=google&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-![JavaScript](https://img.shields.io/badge/JavaScript-95.2%25-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat-square&logo=node.js&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
-![Claude AI](https://img.shields.io/badge/Claude_AI-Anthropic-D4A574?style=flat-square)
+**Real-time hand-tracking games with a Harry Potter twist — built for a college escape room expo.**
 
 </div>
 
 ---
 
-## What is StockSense?
+## 🎬 Demo
 
-StockSense is a full-stack stock dashboard that combines real-time market data with Claude AI analysis to help retail investors make informed decisions without juggling ten different tabs.
+> Point your index finger at the camera and catch flying golden snitches in real time!
 
-**Key features:**
-- **Live Quotes & Charts** — Real-time prices and interactive OHLCV candlestick charts
-- **AI Analysis** — Claude-powered buy/sell/hold recommendations fusing technicals, news, and sentiment
-- **Why Is It Moving?** — AI-generated plain-English explanations for stock movements
-- **Smart Screener** — Filter stocks with AI-ranked top 3 picks
-- **Watchlist** — Track favorites with AI sentiment scores
-- **User Accounts** — Full auth system with JWT, profile management, and avatar uploads
+*(Add a GIF/screenshot of gameplay here — even a photo from the expo works great!)*
 
 ---
 
-## Architecture
-```
-StockSense/
-├── client/              # Frontend (HTML/CSS/JS)
-├── src/
-│   ├── routes/          # Express API routes
-│   ├── middleware/       # Auth, error handling
-│   ├── models/          # MongoDB/Mongoose schemas
-│   └── services/        # External API integrations
-├── server.js            # Entry point
-├── .env.example         # Environment variable template
-└── package.json
-```
+## 🎮 Features
+
+- **Golden Snitch Chase** — Use your index finger to catch snitches flying across the screen
+- **Real-time hand tracking** via MediaPipe — no controllers needed, just a webcam
+- **Difficulty scaling** — snitches get faster as your score climbs
+- **Combo system** — catch multiple snitches in quick succession for bonus points
+- **Bludger obstacles** — avoid rogue bludgers or lose points
+- **Power-ups** — special catches grant temporary abilities
 
 ---
 
-## Quick Start
+## 🛠️ Tech Stack
+
+| Library | Purpose |
+|---|---|
+| `opencv-python` | Video capture, rendering, frame processing |
+| `mediapipe` | Real-time hand landmark detection |
+| `numpy` | Coordinate math and array operations |
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- MongoDB instance (local or Atlas)
-- API keys: Anthropic (Claude), Finnhub, Alpha Vantage (optional), NewsAPI (optional)
+- Python 3.7+
+- A webcam
+- Decent lighting (the hand tracker loves it)
 
-### Setup
+### Installation
+
 ```bash
 # Clone the repo
-git clone https://github.com/Arvoxis/StockSense.git
-cd StockSense
+git clone https://github.com/Arvoxis/Harry-puttar-snitch-game.git
+cd Harry-puttar-snitch-game
 
 # Install dependencies
-npm install
-
-# Configure environment variables
-cp .env.example .env
-# Fill in your API keys in .env
-
-# Start development server (hot reload)
-npm run dev
-
-# Or start production server
-npm start
+pip install -r requirements.txt
 ```
 
-### Environment Variables
+### Run
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| MONGO_URI | Yes | MongoDB connection string |
-| JWT_SECRET | Yes | Secret for access tokens |
-| JWT_REFRESH_SECRET | Yes | Secret for refresh tokens |
-| ANTHROPIC_API_KEY | Yes | Claude API key for AI features |
-| FINNHUB_API_KEY | Yes | Primary market data source |
-| ALPHA_VANTAGE_KEY | Optional | Chart data fallback |
-| NEWS_API_KEY | Optional | Secondary news source |
+```bash
+python snitch.py
+```
 
 ---
 
-## API Overview
+## 🕹️ How to Play
 
-The backend exposes RESTful endpoints across five domains:
+1. Run the script — your webcam feed will open
+2. **Point your index finger** toward the camera
+3. Move your finger to **touch the golden snitch** on screen
+4. Avoid bludgers — they deduct points
+5. Build combos for multiplied scores!
 
-- **Auth** — Signup, login, JWT refresh, logout
-- **Stocks** — Search, live quotes, charts, fundamentals, technical indicators (EMA/BB/RSI/MACD)
-- **Market** — Index tracking (S&P 500, NASDAQ, DOW, VIX), top movers
-- **AI** — Claude analysis, movement explainer, sentiment scoring, screener picks
-- **User** — Watchlist CRUD, profile updates, avatar upload
-
-Health check available at GET /health.
-
----
-
-## Built With
-
-- **Backend:** Node.js, Express
-- **Database:** MongoDB, Mongoose
-- **AI:** Anthropic Claude API
-- **Market Data:** Finnhub, Alpha Vantage
-- **Auth:** JWT (access + refresh tokens)
-- **Frontend:** Vanilla JS, CSS
+**Controls:**
+| Action | Gesture |
+|---|---|
+| Catch snitch | Point index finger at it |
+| Quit game | Press `Q` |
 
 ---
 
-## Roadmap
+## 📁 Project Structure
 
-- [ ] Add WebSocket for real-time price streaming
-- [ ] Portfolio tracking with P&L calculations
-- [ ] Mobile-responsive redesign
-- [ ] Deploy to production (Render/Railway)
+```
+Harry-puttar-snitch-game/
+├── snitch.py          # Main game loop
+├── requirements.txt   # Python dependencies
+├── README.md
+└── .gitignore
+```
 
 ---
 
-## License
+## 🎓 Background
 
-This project is open source and available under the MIT License.
+Built as part of a **Harry Potter themed escape room** at our college tech expo. The game was a crowd-pleaser — players had to catch 10 snitches within a time limit to unlock the next escape room clue.
+
+---
+
+## 📦 Requirements
+
+```
+opencv-python
+mediapipe
+numpy
+```
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! If you want to add a new game mode (Whomping Willow whacker, anyone?), fork the repo and open a PR.
+
+---
+
+## 📄 License
+
+MIT License — free to use, remix, and build on.
 
 ---
 
 <div align="center">
-
-**Built by [Rakshit Sinha](https://github.com/Arvoxis)**
-
+Made with ⚡ by <a href="https://github.com/Arvoxis">Arvoxis</a>
 </div>
