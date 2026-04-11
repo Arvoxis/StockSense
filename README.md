@@ -16,12 +16,6 @@
 
 ---
 
-## 🖼️ Screenshot
-
-*(Add a screenshot of your dashboard here — hugely boosts impressions!)*
-
----
-
 ## ✨ Features
 
 - 📊 **Real-time stock prices** via Finnhub API
