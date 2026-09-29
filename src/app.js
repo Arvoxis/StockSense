@@ -62,7 +62,7 @@ app.get('/api/health', async (_req, res) => {
     finnhubStatus = 'ok';
   } catch { /* stay error */ }
 
-  let anthropicStatus = 'error';
+  let llmStatus = 'error';
   try {
     const Groq = require('groq-sdk');
     const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
@@ -71,7 +71,7 @@ app.get('/api/health', async (_req, res) => {
       max_tokens: 10,
       messages: [{ role: 'user', content: 'ping' }],
     });
-    anthropicStatus = 'ok';
+    llmStatus = 'ok';
   } catch { /* stay error */ }
 
   res.json({
@@ -80,11 +80,11 @@ app.get('/api/health', async (_req, res) => {
     services: {
       mongodb: mongoStatus,
       finnhub: finnhubStatus,
-      anthropic: anthropicStatus,
+      llm: llmStatus,   // Groq - see services/anthropicService.js (misnamed)
     },
     env: {
       FINNHUB_API_KEY: process.env.FINNHUB_API_KEY ? '✅ loaded' : '❌ missing',
-      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY ? '✅ loaded' : '❌ missing',
+      GROQ_API_KEY: process.env.GROQ_API_KEY ? '✅ loaded' : '❌ missing',
       ALPHA_VANTAGE_API_KEY: process.env.ALPHA_VANTAGE_API_KEY ? '✅ loaded' : '❌ missing',
       MONGO_URI: process.env.MONGO_URI ? '✅ loaded' : '❌ missing',
       JWT_SECRET: process.env.JWT_SECRET ? '✅ loaded' : '❌ missing',
