@@ -5,10 +5,10 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![Claude AI](https://img.shields.io/badge/Claude_AI-Anthropic-CC785C?style=for-the-badge)
+![Groq](https://img.shields.io/badge/Groq-Llama_3.3_70B-F55036?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**An AI-powered stock dashboard that gives you real-time prices, interactive charts, and Claude AI buy/sell/hold calls — all in one place.**
+**An AI-powered stock dashboard that gives you real-time prices, interactive charts, and AI buy/sell/hold calls — all in one place.**
 
 > Stop juggling tabs. StockSense fuses technicals, news, and sentiment into one clean interface.
 
@@ -25,7 +25,7 @@
 ## ✨ Features
 
 - 📊 **Real-time stock prices** via Finnhub API
-- 🤖 **Claude AI analysis** — get buy/sell/hold recommendations with reasoning
+- 🤖 **AI analysis** — get buy/sell/hold recommendations with reasoning
 - 💬 **"Why Is It Moving?"** — one-click AI explainer for any price movement
 - 📰 **News + Sentiment fusion** — market and company news aggregated in real time
 - 📉 **Technical indicators** — EMA, Bollinger Bands, RSI, MACD
@@ -42,7 +42,7 @@
 | Backend | Node.js, Express |
 | Database | MongoDB (Atlas) |
 | Auth | JWT (access + refresh tokens) |
-| AI | Anthropic Claude API |
+| AI | Groq API (`llama-3.3-70b-versatile`) |
 | Market Data | Finnhub (primary), Alpha Vantage (charts fallback) |
 | News | NewsAPI |
 
@@ -53,7 +53,7 @@
 ### Prerequisites
 - Node.js 18+
 - MongoDB Atlas account (free tier works)
-- API keys: Anthropic, Finnhub, Alpha Vantage, NewsAPI
+- API keys: Groq, Finnhub, Alpha Vantage, NewsAPI
 
 ### Installation
 
@@ -78,7 +78,7 @@ cp .env.example .env
 | `MONGO_URI` | MongoDB connection string |
 | `JWT_SECRET` | Secret for access tokens (15 min expiry) |
 | `JWT_REFRESH_SECRET` | Secret for refresh tokens (7 day expiry) |
-| `ANTHROPIC_API_KEY` | Claude API key |
+| `GROQ_API_KEY` | Groq API key |
 | `FINNHUB_API_KEY` | Finnhub — primary market data source |
 | `ALPHA_VANTAGE_KEY` | Alpha Vantage — chart data fallback |
 | `NEWS_API_KEY` | NewsAPI — optional secondary news source |
@@ -118,7 +118,7 @@ npm start
 ### AI Endpoints
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/ai/analyze` | Claude buy/sell/hold analysis |
+| POST | `/api/ai/analyze` | AI buy/sell/hold analysis |
 | GET | `/api/ai/whymoving/:ticker` | Explain why a stock is moving |
 | POST | `/api/ai/sentiment` | Sentiment scoring |
 | GET | `/api/ai/screener-picks` | Top 3 AI stock picks |

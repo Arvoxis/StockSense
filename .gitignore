@@ -3,3 +3,6 @@ client/node_modules/
 client/dist/
 .env
 uploads/
+
+# graphify knowledge-graph output (regenerate with /graphify . --update)
+graphify-out/
